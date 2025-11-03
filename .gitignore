@@ -1,0 +1,37 @@
+# --- Gradle (cache) ---
+.gradle/
+**/build/
+
+# --- Android Studio / IntelliJ ---
+*.iml
+.idea/
+# (opcional) deja estas si las usas en equipo:
+#!.idea/codeStyles
+#!.idea/runConfigurations
+
+# --- Android / NDK ---
+local.properties
+.cxx/
+.externalNativeBuild/
+captures/
+outputs/
+
+# --- Artefactos ---
+*.apk
+*.aab
+*.ap_
+
+# --- Keystores (NO subir nunca) ---
+*.jks
+*.keystore
+
+# --- Logs y SO ---
+*.log
+.DS_Store
+Thumbs.db
+
+# --- Asegurar wrapper (sí debe subir) ---
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+!gradlew
+!gradlew.bat

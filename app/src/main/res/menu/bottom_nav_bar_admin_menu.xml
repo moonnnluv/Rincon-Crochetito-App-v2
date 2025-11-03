@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/op_productos_a"
+        android:title="@string/op_productos_a"
+        android:icon="@drawable/ic_product">
+
+    </item>
+
+
+    <item
+        android:id="@+id/btn_crear_producto"
+        android:title=" "
+        android:enabled="false">
+
+    </item>
+
+
+    <item
+        android:id="@+id/op_pagos_a"
+        android:title="@string/op_pagos_a"
+        android:icon="@drawable/ic_payment">>
+
+    </item>
+
+</menu>

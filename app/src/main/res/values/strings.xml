@@ -1,0 +1,44 @@
+<resources>
+    <!-- Nombre de la Aplicación -->
+    <string name="app_name">Rincón Crochetito</string>
+
+    <!-- Opciones de Navegación del Administrador (Vista Admin) -->
+    <string name="op_inicio_a">Inicio</string>
+    <string name="op_productos_a">Productos</string>
+    <string name="op_usuarios_a">Usuarios</string>
+    <string name="op_pagos_a">Pagos y Órdenes</string>
+    <string name="op_cerrar_sesion_a">Cerrar Sesión</string>
+
+    <!-- Opciones de Navegación del Cliente (Vista Cliente - para completar) -->
+    <string name="op_inicio_c">Inicio</string>
+    <string name="op_carrito_c">Mi Carrito</string>
+    <string name="op_perfil_c">Mi Perfil</string>
+    <string name="op_cerrar_sesion_c">Cerrar Sesión</string>
+
+    <!-- Textos de Funcionalidad (CRUD Producto) -->
+    <string name="btn_crear_producto">Crear Producto</string>
+    <string name="btn_editar_producto">Editar</string>
+    <string name="btn_eliminar_producto">Eliminar</string>
+    <string name="hint_nombre_producto">Nombre del Producto</string>
+    <string name="hint_descripcion_producto">Descripción</string>
+    <string name="hint_precio_producto">Precio</string>
+    <string name="hint_stock_producto">Stock</string>
+    <string name="btn_subir_imagenes">Subir Imágenes</string>
+
+    <!-- Textos de Funcionalidad (CRUD Usuario) -->
+    <string name="btn_bloquear_usuario">Bloquear</string>
+    <string name="btn_desbloquear_usuario">Desbloquear</string>
+
+    <!-- Textos de Funcionalidad (Pagos) -->
+    <string name="btn_aceptar_pago">Aceptar Pago</string>
+    <string name="btn_rechazar_pago">Rechazar Pago</string>
+    <string name="btn_enviar_producto">Marcar como Enviado</string>
+    <string name="label_estado_pago">Estado de Pago:</string>
+    <string name="label_estado_envio">Estado de Envío:</string>
+
+    <string name="txt_bienvenida">Bienvenido/a</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
