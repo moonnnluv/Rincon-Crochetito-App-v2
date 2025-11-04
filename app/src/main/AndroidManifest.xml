@@ -12,8 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rincon_crochetitov2">
         <activity
-            android:name=".Administrador.MainActivityAdmin"
+            android:name=".Administrador.RegistroAdminActivity"
             android:exported="false" />
+        <activity
+            android:name=".Administrador.MainActivityAdmin"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Rincon_crochetitov2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

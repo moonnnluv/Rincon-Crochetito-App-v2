@@ -10,6 +10,7 @@ material = "1.10.0"
 googleServiceV = "4.4.4"
 activity = "1.11.0"
 constraintlayout = "2.1.4"
+firebaseAuthA = "24.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -20,6 +21,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+firebaseAuth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuthA"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

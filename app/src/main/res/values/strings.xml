@@ -40,6 +40,15 @@
     <string name="open_drawer">Open drawer</string>
     <string name="close_drawer">Close drawer"</string>
 
+    <!-- Registro Admin -->
+
+    <string name="txtRegistroA">Registro de Administrador</string>
+    <string name="etNombresA">Nombres</string>
+    <string name="etEmailA">Email</string>
+    <string name="etPasswordA">Contraseña</string>
+    <string name="etCPasswordA">Confirmar Contraseña</string>
+    <string name="btnRegistrarA">Registrarme</string>
+
 
 
 </resources>

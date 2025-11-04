@@ -1,10 +1,11 @@
 package com.example.rincon_crochetitov2.Administrador
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentInicioA
@@ -14,12 +15,14 @@ import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentUsuariosA
 import com.example.rincon_crochetitov2.R
 import com.example.rincon_crochetitov2.databinding.ActivityMainAdminBinding
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivityAdmin :
     AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainAdminBinding
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +31,10 @@ class MainActivityAdmin :
 
         // Toolbar (usa la Toolbar del layout incluido app_bar_main.xml)
         setSupportActionBar(binding.appBarMainAdmin.toolbar)
+
+        // Firebase Auth
+        firebaseAuth = FirebaseAuth.getInstance()
+        comprobarSesion()
 
         // Listener del menú lateral
         binding.navigationView.setNavigationItemSelectedListener(this)
@@ -48,6 +55,17 @@ class MainActivityAdmin :
         binding.navigationView.setCheckedItem(R.id.op_inicio_a)
     }
 
+    private fun comprobarSesion() {
+        val user = firebaseAuth.currentUser
+        if (user == null) {
+            startActivity(Intent(this, RegistroAdminActivity::class.java))
+            Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
+            finish() // evita volver aquí con Back
+        } else {
+            Toast.makeText(this, "Usuario conectado!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
@@ -62,8 +80,10 @@ class MainActivityAdmin :
             R.id.op_usuarios_a   -> replaceFragment(FragmentUsuariosA())
             R.id.op_pagos_a      -> replaceFragment(FragmentPagosA())
             R.id.op_cerrar_sesion_a -> {
-                // TODO: limpiar SharedPreferences y volver al LoginActivity
+                firebaseAuth.signOut()
+                startActivity(Intent(this, RegistroAdminActivity::class.java))
                 Toast.makeText(this, "Saliste de la aplicación", Toast.LENGTH_SHORT).show()
+                finish()
             }
         }
         binding.drawerLayoutAdmin.closeDrawer(GravityCompat.START)
