@@ -55,14 +55,18 @@ class MainActivityAdmin :
         binding.navigationView.setCheckedItem(R.id.op_inicio_a)
     }
 
+
+    private fun cerrarSesion(){
+        firebaseAuth!!.signOut()
+        startActivity(Intent(this, LoginActivityAdmin::class.java))
+        finish()
+        Toast.makeText(applicationContext, "Sesión cerrada", Toast.LENGTH_SHORT).show()
+    }
     private fun comprobarSesion() {
-        val user = firebaseAuth.currentUser
-        if (user == null) {
-            startActivity(Intent(this, RegistroAdminActivity::class.java))
-            Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
-            finish() // evita volver aquí con Back
+        if (firebaseAuth!!.currentUser == null) {
+            startActivity(Intent(this, LoginActivityAdmin::class.java))
         } else {
-            Toast.makeText(this, "Usuario conectado!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Sesión ya iniciada", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -80,10 +84,7 @@ class MainActivityAdmin :
             R.id.op_usuarios_a   -> replaceFragment(FragmentUsuariosA())
             R.id.op_pagos_a      -> replaceFragment(FragmentPagosA())
             R.id.op_cerrar_sesion_a -> {
-                firebaseAuth.signOut()
-                startActivity(Intent(this, RegistroAdminActivity::class.java))
-                Toast.makeText(this, "Saliste de la aplicación", Toast.LENGTH_SHORT).show()
-                finish()
+                cerrarSesion()
             }
         }
         binding.drawerLayoutAdmin.closeDrawer(GravityCompat.START)

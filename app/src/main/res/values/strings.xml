@@ -49,5 +49,11 @@
     <string name="etCPasswordA">Confirmar Contraseña</string>
     <string name="btnRegistrarA">Registrarme</string>
 
+    <!-- Login Admin -->
+    <string name="txtLoginA">Login de Administrador</string>
+    <string name="btnLoginA">Ingresar</string>
+    <string name="txtnoCuenta">¿No tienes una cuenta?</string>
+    <string name="tvRegistrarA">Registrarme</string>
+
 
 </resources>

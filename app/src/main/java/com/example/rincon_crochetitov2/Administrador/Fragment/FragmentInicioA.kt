@@ -65,9 +65,9 @@ class FragmentInicioA : Fragment() {
     }
 
     private fun replaceFragment(fragment: Fragment) {
-        parentFragmentManager
+        childFragmentManager
             .beginTransaction()
-            .replace(R.id.navFragment, fragment)
+            .replace(R.id.bottomFragment, fragment)
             .commit()
     }
 
