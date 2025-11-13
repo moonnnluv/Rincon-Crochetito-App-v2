@@ -11,6 +11,8 @@
 
     <!-- Opciones de Navegación del Cliente (Vista Cliente - para completar) -->
     <string name="op_inicio_c">Inicio</string>
+    <string name="op_tienda_c">Tienda</string>
+    <string name="op_ordenes_c">Mis Órdenes</string>
     <string name="op_carrito_c">Mi Carrito</string>
     <string name="op_perfil_c">Mi Perfil</string>
     <string name="op_cerrar_sesion_c">Cerrar Sesión</string>
@@ -54,6 +56,8 @@
     <string name="btnLoginA">Ingresar</string>
     <string name="txtnoCuenta">¿No tienes una cuenta?</string>
     <string name="tvRegistrarA">Registrarme</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

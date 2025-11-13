@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/grupo_op"
+        android:checkableBehavior="single">
+
+        <!-- 1. Inicio -->
+        <item
+            android:id="@+id/op_inicio_c"
+            android:title="@string/op_inicio_c"
+            android:icon="@drawable/ic_home" /> <!-- Asegúrate de tener un icono ic_home -->
+
+
+        <!-- 3. CRUD de Usuario -->
+        <item
+            android:id="@+id/op_perfil_c"
+            android:title="@string/op_perfil_c"
+            android:icon="@drawable/ic_person" /> <!-- Asegúrate de tener un icono ic_person -->
+
+
+    </group>
+
+    <!-- Separador o Grupo de Acciones -->
+    <item android:title="Acciones">
+        <menu>
+            <!-- 5. Cerrar Sesión -->
+            <item
+                android:id="@+id/op_cerrar_sesion_c"
+                android:title="@string/op_cerrar_sesion_c"
+                android:icon="@drawable/ic_logout" /> <!-- Asegúrate de tener un icono ic_logout -->
+        </menu>
+    </item>
+
+</menu>

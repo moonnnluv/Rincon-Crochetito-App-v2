@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/op_tienda_c"
+        android:title="@string/op_tienda_c"
+        android:icon="@drawable/ic_product">
+
+    </item>
+
+
+    <item
+        android:id="@+id/op_ordenes_c"
+        android:title="@string/op_ordenes_c"
+        android:icon="@drawable/ic_payment">>
+
+    </item>
+
+</menu>
