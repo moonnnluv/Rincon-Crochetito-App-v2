@@ -11,8 +11,8 @@
     tools:context=".Cliente.MainActivityCliente">
 
     <include
-        id="@+id/appBar"
-        layout="@layout/app_bar_main">
+        android:id="@+id/app_bar_main"
+        android:layout="@layout/app_bar_main">
     </include>
 
     <com.google.android.material.navigation.NavigationView
