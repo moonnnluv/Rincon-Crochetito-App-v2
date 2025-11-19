@@ -4,16 +4,20 @@
     <item
         android:id="@+id/op_tienda_c"
         android:title="@string/op_tienda_c"
-        android:icon="@drawable/ic_product"> <!-- CAMBIAAAAAR-->
-
-    </item>
-
+        />
 
     <item
-        android:id="@+id/op_ordenes_c"
-        android:title="@string/op_ordenes_c"
-        android:icon="@drawable/ic_payment">>
+        android:id="@+id/op_favoritos_c"
+        android:title="@string/op_favoritos_c"
+         />
 
-    </item>
+    <item
+        android:id="@+id/op_carrito_c"
+        android:title="@string/op_carrito_c"
+         />
 
+    <item
+        android:id="@+id/op_mis_ordenes_c"
+        android:title="@string/op_mis_ordenes_c"
+         />
 </menu>

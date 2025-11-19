@@ -12,6 +12,8 @@ activity = "1.11.0"
 constraintlayout = "2.1.4"
 firebaseAuthA = "24.0.1"
 firebaseDatabaseA = "22.0.1"
+imagePickerV = "2.1"
+glideV = "4.16.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -24,6 +26,8 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebaseAuth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuthA"}
 firebaseDatabase = {group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabaseA"}
+imagePicker = { group = "com.github.dhaval2404", name = "imagepicker", version.ref = "imagePickerV"}
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glideV"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

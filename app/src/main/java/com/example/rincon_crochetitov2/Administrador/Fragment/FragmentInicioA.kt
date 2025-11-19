@@ -1,12 +1,14 @@
 package com.example.rincon_crochetitov2.Administrador.Fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import com.example.rincon_crochetitov2.Administrador.Productos.AgregarProductoActivity
 import com.example.rincon_crochetitov2.R
 import com.example.rincon_crochetitov2.databinding.FragmentInicioABinding
 
@@ -14,6 +16,13 @@ class FragmentInicioA : Fragment() {
 
     private var _binding: FragmentInicioABinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var mContext : Context
+
+    override fun onAttach(context: Context) {
+        mContext = context
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,21 +64,21 @@ class FragmentInicioA : Fragment() {
             }
         }
 
-        // Selección inicial
+        replaceFragment(FragmentProductosA())
         binding.bottomNavigation.selectedItemId = R.id.op_productos_a
 
-        // FAB
         binding.addFab.setOnClickListener {
-            Toast.makeText(requireContext(), "Has presionado el botón flotante", Toast.LENGTH_SHORT).show()
+            val intent = Intent(mContext, AgregarProductoActivity::class.java)
+            intent.putExtra("Edicion", false)
+            mContext.startActivity(intent)
         }
     }
 
     private fun replaceFragment(fragment: Fragment) {
-        childFragmentManager
+        parentFragmentManager
             .beginTransaction()
             .replace(R.id.bottomFragment, fragment)
             .commit()
     }
-
 
 }

@@ -16,8 +16,8 @@
 
         <!-- 3. CRUD de Usuario -->
         <item
-            android:id="@+id/op_perfil_c"
-            android:title="@string/op_perfil_c"
+            android:id="@+id/op_mi_perfil_c"
+            android:title="@string/op_mi_perfil_c"
             android:icon="@drawable/ic_person" /> <!-- Asegúrate de tener un icono ic_person -->
 
 

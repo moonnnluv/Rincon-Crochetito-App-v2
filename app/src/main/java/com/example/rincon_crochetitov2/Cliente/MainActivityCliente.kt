@@ -13,7 +13,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.example.rincon_crochetitov2.Cliente.Fragments.FragmentInicioC
-import com.example.rincon_crochetitov2.Cliente.Fragments.FragmentMiPerfil
+import com.example.rincon_crochetitov2.Cliente.Fragments.FragmentMiPerfilC
 import com.example.rincon_crochetitov2.R
 import com.example.rincon_crochetitov2.SeleccionarTipoActivity
 import com.example.rincon_crochetitov2.databinding.ActivityMainClienteBinding

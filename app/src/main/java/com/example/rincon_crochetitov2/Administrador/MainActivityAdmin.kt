@@ -59,10 +59,11 @@ class MainActivityAdmin :
 
     private fun cerrarSesion(){
         firebaseAuth!!.signOut()
-        startActivity(Intent(this, LoginActivityAdmin::class.java))
+        startActivity(Intent(applicationContext, SeleccionarTipoActivity::class.java))
         finish()
-        Toast.makeText(applicationContext, "Sesión cerrada", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, "Has cerrado sesión", Toast.LENGTH_SHORT).show()
     }
+
     private fun comprobarSesion(){
         /*Si el usuario no ha iniciado sesión, que lo diriga a OpcionesLogin*/
         if (firebaseAuth!!.currentUser==null){
@@ -71,6 +72,7 @@ class MainActivityAdmin :
             Toast.makeText(applicationContext,"Usuario en línea", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager
