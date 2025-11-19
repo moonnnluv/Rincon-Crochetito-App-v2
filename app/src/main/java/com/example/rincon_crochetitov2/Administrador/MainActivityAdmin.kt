@@ -13,6 +13,7 @@ import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentPagosA
 import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentProductosA
 import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentUsuariosA
 import com.example.rincon_crochetitov2.R
+import com.example.rincon_crochetitov2.SeleccionarTipoActivity
 import com.example.rincon_crochetitov2.databinding.ActivityMainAdminBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -62,11 +63,12 @@ class MainActivityAdmin :
         finish()
         Toast.makeText(applicationContext, "Sesión cerrada", Toast.LENGTH_SHORT).show()
     }
-    private fun comprobarSesion() {
-        if (firebaseAuth!!.currentUser == null) {
-            startActivity(Intent(this, LoginActivityAdmin::class.java))
-        } else {
-            Toast.makeText(applicationContext, "Sesión ya iniciada", Toast.LENGTH_SHORT).show()
+    private fun comprobarSesion(){
+        /*Si el usuario no ha iniciado sesión, que lo diriga a OpcionesLogin*/
+        if (firebaseAuth!!.currentUser==null){
+            startActivity(Intent(applicationContext, SeleccionarTipoActivity::class.java))
+        }else{
+            Toast.makeText(applicationContext,"Usuario en línea", Toast.LENGTH_SHORT).show()
         }
     }
 

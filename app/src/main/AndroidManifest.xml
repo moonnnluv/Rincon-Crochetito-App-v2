@@ -14,6 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rincon_crochetitov2">
         <activity
+            android:name=".SeleccionarTipoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Cliente.LoginClienteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Cliente.RegistroClienteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:exported="false" />
+        <activity
             android:name=".Cliente.MainActivityCliente"
             android:exported="false" />
         <activity

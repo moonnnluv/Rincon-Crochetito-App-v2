@@ -97,7 +97,7 @@ class RegistroAdminActivity : AppCompatActivity() {
         val uiDB = firebaseAuth.uid
         val nombreDB = nombres
         val emailDB = email
-        val tipousuario = "Administrador/a"
+        val tipousuario = "administrador"
 
         val tiempoDB = Constantes().obtenerTiempoD()
 
@@ -106,7 +106,7 @@ class RegistroAdminActivity : AppCompatActivity() {
         datosAdmin["uid"] = "$uiDB"
         datosAdmin["nombre"] = "$nombreDB"
         datosAdmin["email"] = "$emailDB"
-        datosAdmin["tipoUsuario"] = "$tipousuario"
+        datosAdmin["tipoUsuario"] = "administrador"
         datosAdmin["tiempo_registro"] = "$tiempoDB"
 
         val reference = FirebaseDatabase.getInstance().getReference("Usuarios")
