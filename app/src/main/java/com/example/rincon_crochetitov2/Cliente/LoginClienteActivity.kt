@@ -36,19 +36,19 @@ class LoginClienteActivity : AppCompatActivity() {
         }
 
         // Login con teléfono (lo mantienes)
-        // binding.btnLoginTel.setOnClickListener {
-            // startActivity(Intent(this, LoginTelActivity::class.java))
-        // }
+        binding.btnLoginTel.setOnClickListener {
+            startActivity(Intent(this, LoginTelActivity::class.java))
+        }
 
         // Ir a registro de cliente
         binding.tvRegistrarC.setOnClickListener {
             startActivity(Intent(this@LoginClienteActivity, RegistroClienteActivity::class.java))
         }
 
-        // Recuperar contraseña
-        // binding.tvRecuperarPass.setOnClickListener {
-            //startActivity(Intent(this@LoginClienteActivity, RecuperarPasswordActivity::class.java))
-        // }
+        Recuperar contraseña
+        binding.tvRecuperarPass.setOnClickListener {
+            startActivity(Intent(this@LoginClienteActivity, RecuperarPasswordActivity::class.java))
+        }
     }
 
     private fun validarInfo() {

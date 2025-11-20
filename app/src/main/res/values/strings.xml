@@ -161,7 +161,8 @@
     <string name="btnEnviarCodigo">Enviar código OTP</string>
     <string name="etCodVer">Código</string>
     <string name="btnVerificarCod">Verificar código</string>
-    <string name="tvReenviarCod">¿No llegó el código?. &lt;b&gt;Reenviar&lt;/b&gt;</string>
+    <string name="tvReenviarCod">¿No llegó el código? Reenviar</string>
+
 
     <!-- Detalle del producto -->
     <string name="txtDetalleProducto">Detalle de la orden</string>

@@ -14,6 +14,8 @@ firebaseAuthA = "24.0.1"
 firebaseDatabaseA = "22.0.1"
 imagePickerV = "2.1"
 glideV = "4.16.0"
+storageV = "21.0.0"
+ccpV = "2.7.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,6 +30,8 @@ firebaseAuth = { group = "com.google.firebase", name = "firebase-auth", version.
 firebaseDatabase = {group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabaseA"}
 imagePicker = { group = "com.github.dhaval2404", name = "imagepicker", version.ref = "imagePickerV"}
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glideV"}
+storage = {group = "com.google.firebase", name = "firebase-storage", version.ref = "storageV"}
+ccp = { group = "com.hbb20", name = "ccp", version.ref = "ccpV"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

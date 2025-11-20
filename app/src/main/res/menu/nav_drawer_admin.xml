@@ -19,6 +19,12 @@
             android:title="@string/op_productos_a"
             android:icon="@drawable/ic_product" /> <!-- Asegúrate de tener un icono ic_product -->
 
+        <!--Categorias-->
+        <item
+            android:id="@+id/op_categorias_v"
+            android:title="@string/op_categorias_v"
+            android:icon="@drawable/ico_categoria"/>
+
         <!-- 3. CRUD de Usuario -->
         <item
             android:id="@+id/op_usuarios_a"
