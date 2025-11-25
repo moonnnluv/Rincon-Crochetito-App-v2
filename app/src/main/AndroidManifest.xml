@@ -21,6 +21,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rincon_crochetitov2">
         <activity
+            android:name=".Cliente.Pago.PagoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Calificacion.MostrarCalificacionesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Calificacion.CalificarProductoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Administrador.Productos.ProductosCatAActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Cliente.RecuperarPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetalleProducto.DetalleProductoActivity"
             android:exported="false" />
         <activity

@@ -69,7 +69,6 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:padding="10dp"
-            android:src="@drawable/ico_limpiar"
             android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -81,6 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"/>  <!--tools:listitem="@layout/item_producto_c"-->
+        tools:listitem="@layout/item_producto_c"
+        app:spanCount="2"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

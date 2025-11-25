@@ -30,7 +30,7 @@ class FragmentCategoriasA : Fragment() {
     private var imageUri : Uri?=null
 
     private lateinit var categoriasArrayList : ArrayList<ModeloCategoria>
-    private lateinit var adaptadorCategoriaV : AdaptadorCategoriaA
+    private lateinit var adaptadorCategoriaA : AdaptadorCategoriaA
 
     override fun onAttach(context: Context) {
         mContext = context
@@ -67,8 +67,8 @@ class FragmentCategoriasA : Fragment() {
                     val modelo = ds.getValue(ModeloCategoria::class.java)
                     categoriasArrayList.add(modelo!!)
                 }
-                adaptadorCategoriaV = AdaptadorCategoriaA(mContext, categoriasArrayList)
-                binding.rvCategorias.adapter = adaptadorCategoriaV
+                adaptadorCategoriaA = AdaptadorCategoriaA(mContext, categoriasArrayList)
+                binding.rvCategorias.adapter = adaptadorCategoriaA
             }
 
             override fun onCancelled(error: DatabaseError) {
