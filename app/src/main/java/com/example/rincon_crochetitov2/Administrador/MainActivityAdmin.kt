@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentInicioA
-import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentPagosA
+import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentOrdenesA
 import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentProductosA
 import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentUsuariosA
 import com.example.rincon_crochetitov2.R
@@ -86,7 +86,7 @@ class MainActivityAdmin :
             R.id.op_inicio_a     -> replaceFragment(FragmentInicioA())
             R.id.op_productos_a  -> replaceFragment(FragmentProductosA())
             R.id.op_usuarios_a   -> replaceFragment(FragmentUsuariosA())
-            R.id.op_pagos_a      -> replaceFragment(FragmentPagosA())
+            R.id.op_pagos_a      -> replaceFragment(FragmentOrdenesA())
             R.id.op_cerrar_sesion_a -> {
                 cerrarSesion()
             }

@@ -52,7 +52,7 @@ class FragmentInicioA : Fragment() {
                     true
                 }
                 R.id.op_pagos_a -> {
-                    replaceFragment(FragmentPagosA())
+                    replaceFragment(FragmentOrdenesA())
                     true
                 }
                 R.id.op_cerrar_sesion_a -> {

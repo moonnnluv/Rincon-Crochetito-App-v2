@@ -2,6 +2,8 @@
     <!-- Nombre de la Aplicación -->
     <string name="app_name">Rincón Crochetito</string>
 
+    <string name="mi_google_maps_api_key">AIzaSyApCmJ4aftMK1ekNRZOzflwoajQpEYsJZc</string>
+
     <!-- Opciones de Navegación del Administrador (Vista Admin) -->
     <string name="op_inicio_a">Inicio</string>
     <string name="op_productos_a">Productos</string>
@@ -193,7 +195,7 @@
 
     <string name="sumaProductos">Suma productos</string>
 
-    <string name="bienvenidaTXT">Bienvenido(a) Marco!</string>
+    <string name="bienvenidaTXT">Bienvenido(a)</string>
     <string name="direccionTXT">Mi dirección</string>
     <string name="txtCategorias">Nuestras categorías</string>
 
@@ -201,7 +203,7 @@
     <string name="txtMiPerfil">Mi perfil</string>
     <string name="nombresCPerfil">Nombres completos</string>
     <string name="emailCPerfil">Email</string>
-    <string name="dniCPerfil">DNI</string>
+    <string name="dniCPerfil">RUT</string>
     <string name="telefonoCPerfil">Teléfono</string>
     <string name="ubicacion">Ubicación</string>
     <string name="fechaRegistroCPerfil">Fecha de registro</string>
@@ -293,6 +295,7 @@
 
     <string name="btnVerClientes">Mis clientes</string>
     <string name="txtListaClientes">Lista de clientes</string>
+
 
     <!-- Placeholder -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
