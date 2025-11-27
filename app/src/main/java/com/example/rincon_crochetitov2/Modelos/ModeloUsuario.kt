@@ -12,6 +12,11 @@ class ModeloUsuario {
     var direccion : String = ""
     var imagen : String = ""
 
+    // 👇 NUEVO CAMPO para bloqueo / desbloqueo
+    // "" o "activo"  -> usuario activo
+    // "bloqueado"    -> usuario bloqueado
+    var estado: String = ""
+
     constructor()
 
     constructor(
@@ -34,7 +39,7 @@ class ModeloUsuario {
         this.telefono = telefono
         this.direccion = direccion
         this.imagen = imagen
+        // estado lo puedes setear aparte si quieres:
+        // this.estado = "activo"
     }
-
-
 }

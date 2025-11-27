@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!--Mis productos-->
     <item
-        android:id="@+id/op_productos_a"
-        android:title="@string/op_productos_a"
-        android:icon="@drawable/ic_product">
+        android:id="@+id/op_mis_productos_v"
+        android:title="@string/op_mis_productos_v"
+        android:icon="@drawable/ico_mis_productos"
+        />
 
-    </item>
-
-
+    <!--Agregar un producto-->
     <item
-        android:id="@+id/btn_crear_producto"
-        android:title=" "
-        android:enabled="false">
+        android:id="@+id/op_agregar_prod_v"
+        android:title=""
+        android:enabled="false"
+        />
 
-    </item>
-
-
+    <!--Órdenes de los clientes-->
     <item
-        android:id="@+id/op_pagos_a"
-        android:title="@string/op_pagos_a"
-        android:icon="@drawable/ic_payment">>
-
-    </item>
+        android:id="@+id/op_mis_ordenes_v"
+        android:title="@string/op_mis_ordenes_v"
+        android:icon="@drawable/ico_ordenes"
+        />
 
 </menu>

@@ -8,15 +8,18 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentCategoriasA
 import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentInicioA
+import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentMiTiendaA
+import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentMisProductosA
 import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentOrdenesA
 import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentProductosA
-import com.example.rincon_crochetitov2.Administrador.Fragment.FragmentUsuariosA
 import com.example.rincon_crochetitov2.R
 import com.example.rincon_crochetitov2.SeleccionarTipoActivity
 import com.example.rincon_crochetitov2.databinding.ActivityMainAdminBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+
 
 class MainActivityAdmin :
     AppCompatActivity(),
@@ -53,7 +56,7 @@ class MainActivityAdmin :
 
         // Fragment por defecto
         replaceFragment(FragmentInicioA())
-        binding.navigationView.setCheckedItem(R.id.op_inicio_a)
+        binding.navigationView.setCheckedItem(R.id.op_inicio_v)
     }
 
 
@@ -82,13 +85,27 @@ class MainActivityAdmin :
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.op_inicio_a     -> replaceFragment(FragmentInicioA())
-            R.id.op_productos_a  -> replaceFragment(FragmentProductosA())
-            R.id.op_usuarios_a   -> replaceFragment(FragmentUsuariosA())
-            R.id.op_pagos_a      -> replaceFragment(FragmentOrdenesA())
-            R.id.op_cerrar_sesion_a -> {
+        when (item.itemId){
+            R.id.op_inicio_v->{
+                replaceFragment(FragmentInicioA())
+            }
+            R.id.op_mi_tienda_v->{
+                replaceFragment(FragmentMiTiendaA())
+            }
+            R.id.op_categorias_v->{
+                replaceFragment(FragmentCategoriasA())
+            }
+            R.id.op_productos_v->{
+                replaceFragment(FragmentProductosA())
+            }
+            R.id.op_cerrar_sesion_v->{
                 cerrarSesion()
+            }
+            R.id.op_mis_productos_v->{
+                replaceFragment(FragmentMisProductosA())
+            }
+            R.id.op_mis_ordenes_v->{
+                replaceFragment(FragmentOrdenesA())
             }
         }
         binding.drawerLayoutAdmin.closeDrawer(GravityCompat.START)

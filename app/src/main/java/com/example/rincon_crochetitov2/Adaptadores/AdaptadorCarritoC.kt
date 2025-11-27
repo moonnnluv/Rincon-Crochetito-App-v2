@@ -144,12 +144,12 @@ class AdaptadorCarritoC : RecyclerView.Adapter<AdaptadorCarritoC.HolderProductoC
 
     private fun visualizarDescuento(modeloProductoCarrito: ModeloProductoCarrito, holder: AdaptadorCarritoC.HolderProductoCarrito) {
         if (!modeloProductoCarrito.precioDesc.equals("0")){
-            holder.precioFinalPCar.text = modeloProductoCarrito.precioFinal.plus(" USD")
-            holder.precioOriginalPCar.text = modeloProductoCarrito.precio.plus(" USD")
+            holder.precioFinalPCar.text = modeloProductoCarrito.precioFinal.plus(" CLP")
+            holder.precioOriginalPCar.text = modeloProductoCarrito.precio.plus(" CLP")
             holder.precioOriginalPCar.paintFlags = holder.precioOriginalPCar.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }else{
             holder.precioOriginalPCar.visibility = View.GONE
-            holder.precioFinalPCar.text = modeloProductoCarrito.precioFinal.plus(" USD")
+            holder.precioFinalPCar.text = modeloProductoCarrito.precioFinal.plus(" CLP")
         }
     }
 

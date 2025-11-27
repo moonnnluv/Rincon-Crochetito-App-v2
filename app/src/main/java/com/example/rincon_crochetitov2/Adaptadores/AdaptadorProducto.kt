@@ -100,8 +100,8 @@ class AdaptadorProducto : RecyclerView.Adapter<AdaptadorProducto.HolderProducto>
 
             //Setear la información
             holder.item_nota_p.text = "${modeloProducto.notaDesc}"
-            holder.item_precio_p_desc.text = "${modeloProducto.precioDesc}${" USD"}"
-            holder.item_precio_p.text = "${modeloProducto.precio}${" USD"}"
+            holder.item_precio_p_desc.text = "${modeloProducto.precioDesc}${" CLP"}"
+            holder.item_precio_p.text = "${modeloProducto.precio}${" CLP"}"
             holder.item_precio_p.paintFlags = holder.item_precio_p.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG //Tachando el precio original
         }else{
             //El producto no tiene descuento
@@ -110,7 +110,7 @@ class AdaptadorProducto : RecyclerView.Adapter<AdaptadorProducto.HolderProducto>
             holder.item_precio_p_desc.visibility = View.GONE
 
             //Setear la información
-            holder.item_precio_p.text = "${modeloProducto.precio}${" USD"}"
+            holder.item_precio_p.text = "${modeloProducto.precio}${" CLP"}"
             holder.item_precio_p.paintFlags = holder.item_precio_p.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv() //Quitar el tachado
         }
     }

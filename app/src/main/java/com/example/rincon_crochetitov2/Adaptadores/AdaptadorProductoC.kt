@@ -138,13 +138,13 @@ class AdaptadorProductoC : RecyclerView.Adapter<AdaptadorProductoC.HolderProduct
             precioDescuentoTv.visibility = View.VISIBLE
 
             notaDescTv.setText(notaDesc)
-            precioDescuentoTv.setText(precioDesc.plus(" USD")) //80 USD
-            precioOriginalTv.setText(precio.plus(" USD"))
+            precioDescuentoTv.setText(precioDesc.plus(" CLP")) //80 CLP
+            precioOriginalTv.setText(precio.plus(" CLP"))
             precioOriginalTv.paintFlags = precioOriginalTv.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG //Marca como tachado
             costo = precioDesc.toDouble() /*Precio almacena el precio con descuento*/
         }else{
             /*El producto no tiene descuento*/
-            precioOriginalTv.setText(precio.plus(" USD"))
+            precioOriginalTv.setText(precio.plus(" CLP"))
             precioOriginalTv.paintFlags = precioOriginalTv.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv() //Quitamos el tachado
             costo = precio.toDouble() /*Precio almacena el precio original*/
         }
@@ -275,8 +275,8 @@ class AdaptadorProductoC : RecyclerView.Adapter<AdaptadorProductoC.HolderProduct
 
             //Setear la información
             holder.item_nota_p.text = "${modeloProducto.notaDesc}"
-            holder.item_precio_p_desc.text = "${modeloProducto.precioDesc}${" USD"}"
-            holder.item_precio_p.text = "${modeloProducto.precio}${" USD"}"
+            holder.item_precio_p_desc.text = "${modeloProducto.precioDesc}${" CLP"}"
+            holder.item_precio_p.text = "${modeloProducto.precio}${" CLP"}"
             holder.item_precio_p.paintFlags = holder.item_precio_p.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG //Tachando el precio original
         }else{
             //El producto no tiene descuento
@@ -285,7 +285,7 @@ class AdaptadorProductoC : RecyclerView.Adapter<AdaptadorProductoC.HolderProduct
             holder.item_precio_p_desc.visibility = View.GONE
 
             //Setear la información
-            holder.item_precio_p.text = "${modeloProducto.precio}${" USD"}"
+            holder.item_precio_p.text = "${modeloProducto.precio}${" CLP"}"
             holder.item_precio_p.paintFlags = holder.item_precio_p.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv() //Quitar el tachado
         }
 

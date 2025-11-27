@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:padding="15dp"
     android:orientation="vertical"
-    android:gravity="bottom"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Cliente.LoginTelActivity">
@@ -43,7 +43,7 @@
             android:layout_marginEnd="8dp"
             app:ccp_autoDetectCountry="true"
             app:ccp_rememberLastSelection="true"
-            app:ccp_showFlag="true"
+            app:ccp_showFlag="false"
             app:ccp_showNameCode="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -103,7 +103,6 @@
             android:layout_below="@id/btnVerificarCod"
             android:layout_centerHorizontal="true"
             android:padding="5dp"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

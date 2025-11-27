@@ -65,8 +65,8 @@ class AdaptadorProductoAleatorio : RecyclerView.Adapter<AdaptadorProductoAleator
 
             //Setear la información
             holder.notaDescP.text = "${modeloProducto.notaDesc}"
-            holder.precioDescP.text = "${modeloProducto.precioDesc}${" USD"}"
-            holder.precioP.text = "${modeloProducto.precio}${" USD"}"
+            holder.precioDescP.text = "${modeloProducto.precioDesc}${" CLP"}"
+            holder.precioP.text = "${modeloProducto.precio}${" CLP"}"
             holder.precioP.paintFlags = holder.precioP.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG //Tachando el precio original
         }else{
             //El producto no tiene descuento
@@ -75,7 +75,7 @@ class AdaptadorProductoAleatorio : RecyclerView.Adapter<AdaptadorProductoAleator
             holder.precioDescP.visibility = View.GONE
 
             //Setear la información
-            holder.precioP.text = "${modeloProducto.precio}${" USD"}"
+            holder.precioP.text = "${modeloProducto.precio}${" CLP"}"
             holder.precioP.paintFlags = holder.precioP.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv() //Quitar el tachado
         }
 

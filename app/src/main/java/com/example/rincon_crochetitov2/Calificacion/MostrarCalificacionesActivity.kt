@@ -1,21 +1,61 @@
 package com.example.rincon_crochetitov2.Calificacion
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.rincon_crochetitov2.Adaptadores.AdaptadorCalificacion
+import com.example.rincon_crochetitov2.Modelos.ModeloCalificacion
 import com.example.rincon_crochetitov2.R
+import com.example.rincon_crochetitov2.databinding.ActivityMostrarCalificacionesBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class MostrarCalificacionesActivity : AppCompatActivity() {
+
+    private lateinit var binding : ActivityMostrarCalificacionesBinding
+    private var idProducto = ""
+
+    private lateinit var calificacionesArrayList : ArrayList<ModeloCalificacion>
+    private lateinit var adaptadorCalificacion : AdaptadorCalificacion
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_mostrar_calificaciones)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityMostrarCalificacionesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        idProducto = intent.getStringExtra("idProducto").toString()
+
+        binding.IbRegresar.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
+
+        listarCalificaciones(idProducto)
+
+    }
+
+    private fun listarCalificaciones(idProducto: String) {
+        calificacionesArrayList = ArrayList()
+
+        val ref = FirebaseDatabase.getInstance().getReference("Productos/$idProducto/Calificaciones")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                calificacionesArrayList.clear()
+                for (ds in snapshot.children){
+                    val modeloCalificacion = ds.getValue(ModeloCalificacion::class.java)
+                    calificacionesArrayList.add(modeloCalificacion!!)
+                }
+
+                adaptadorCalificacion = AdaptadorCalificacion(this@MostrarCalificacionesActivity , calificacionesArrayList)
+                binding.calificacionesRV.adapter = adaptadorCalificacion
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+
     }
 }

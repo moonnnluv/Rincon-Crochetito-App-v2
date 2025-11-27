@@ -184,6 +184,20 @@
                 android:layout_below="@+id/descripcionPDTXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAgregarCarrito"
+                android:text="@string/btnAgregarCarrito"
+                app:cornerRadius="8dp"
+                android:textAllCaps="true"
+                android:layout_marginTop="10dp"
+                app:icon="@drawable/ico_carrito"
+                android:layout_below="@+id/descripcionPD"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.button.MaterialButton>
 
 
 

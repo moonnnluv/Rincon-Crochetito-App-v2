@@ -111,11 +111,11 @@ class DetalleProductoActivity : AppCompatActivity() {
 
                     binding.nombrePD.text = nombre
                     binding.descripcionPD.text = descripcion
-                    binding.precioPD.text = precio.plus(" USD")
+                    binding.precioPD.text = precio.plus(" CLP")
 
                     if (!precioDesc.equals("") && !notaDesc.equals("")){
                         /*Producto con descuento*/
-                        binding.precioDescPD.text = precioDesc.plus(" USD")
+                        binding.precioDescPD.text = precioDesc.plus(" CLP")
                         binding.notaDescPD.text = notaDesc
 
                         binding.precioPD.paintFlags = binding.precioPD.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG

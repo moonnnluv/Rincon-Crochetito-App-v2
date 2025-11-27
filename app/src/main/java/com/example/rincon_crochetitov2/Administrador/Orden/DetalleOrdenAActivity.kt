@@ -178,7 +178,7 @@ class DetalleOrdenAActivity : AppCompatActivity() {
     private fun smsCliente(telefono : String){
         val intent = Intent(Intent.ACTION_SENDTO)
         intent.setData(Uri.parse("smsto:$telefono"))
-        intent.putExtra("sms_body","Estimado(a) cliente , le escribimos de la tienda xyz ...")
+        intent.putExtra("sms_body","Estimado(a) cliente , le escribimos de Rincón Crochetito con respecto a su pedido ...")
         startActivity(intent)
     }
 

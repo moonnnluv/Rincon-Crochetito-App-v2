@@ -10,6 +10,10 @@
     <string name="op_usuarios_a">Usuarios</string>
     <string name="op_pagos_a">Pagos y Órdenes</string>
     <string name="op_cerrar_sesion_a">Cerrar Sesión</string>
+    <string name="op_categorias_a">Categorias</string>
+    <string name="op_mis_productos_a">Mis productos</string>
+    <string name="op_mis_ordenes_a">Órdenes</string>
+    <string name="op_mi_tienda_a">Mi tienda</string>
 
     <!-- Opciones de Navegación del Cliente (Vista Cliente) -->
     <string name="op_inicio_c">Inicio</string>
@@ -170,7 +174,7 @@
     <string name="txtDetalleProducto">Detalle de la orden</string>
     <string name="tvPromCal">0.0/5</string>
     <string name="tvTotalCal">(0)</string>
-    <string name="tvDejarCalificacion">&lt;u&gt;Escribir un comentario&lt;/u&gt;</string>
+    <string name="tvDejarCalificacion">Escribir un comentario</string>
     <string name="nombrePD">Nombre del producto</string>
     <string name="descripcionPDTXT">Información general:</string>
     <string name="descripcionPD">Descripción</string>
@@ -288,10 +292,10 @@
     <string name="tvEstado5">Cancelado</string>
 
     <string name="txtGanancias">Ganancias</string>
-    <string name="tvGanancias">0 USD</string>
+    <string name="tvGanancias">0 CLP</string>
 
     <string name="txtPerdidas">Pérdidas</string>
-    <string name="tvPerdidas">0 USD</string>
+    <string name="tvPerdidas">0 CLP</string>
 
     <string name="btnVerClientes">Mis clientes</string>
     <string name="txtListaClientes">Lista de clientes</string>

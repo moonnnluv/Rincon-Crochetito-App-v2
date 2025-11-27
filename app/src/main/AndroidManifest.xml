@@ -24,6 +24,12 @@
         android:theme="@style/Theme.Rincon_crochetitov2"
         tools:replace="android:allowBackup,android:dataExtractionRules,android:fullBackupContent">
         <activity
+            android:name=".Administrador.ListaClientes.EditarClienteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Administrador.ListaClientes.ListaClientesActivity"
+            android:exported="false" />
+        <activity
             android:name=".Cliente.Orden.DetalleOrdenCActivity"
             android:exported="false" />
         <activity
@@ -82,7 +88,7 @@
             android:exported="false" />
         <activity
             android:name=".Administrador.RegistroAdminActivity"
-            android:exported="false" /> <!-- Activity de inicio de la app -->
+            android:exported="false" />
         <activity
             android:name=".Administrador.MainActivityAdmin"
             android:exported="true"

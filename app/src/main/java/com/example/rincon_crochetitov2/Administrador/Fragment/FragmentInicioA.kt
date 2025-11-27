@@ -14,9 +14,7 @@ import com.example.rincon_crochetitov2.databinding.FragmentInicioABinding
 
 class FragmentInicioA : Fragment() {
 
-    private var _binding: FragmentInicioABinding? = null
-    private val binding get() = _binding!!
-
+    private lateinit var binding : FragmentInicioABinding
     private lateinit var mContext : Context
 
     override fun onAttach(context: Context) {
@@ -24,54 +22,34 @@ class FragmentInicioA : Fragment() {
         super.onAttach(context)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentInicioABinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentInicioABinding.inflate(inflater,container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // Listener de BottomNavigation: devuelve true cuando manejas el ítem
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.op_inicio_a -> {
-                    replaceFragment(FragmentInicioA()) // o tu fragment de “inicio”
-                    true
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.op_mis_productos_v->{
+                    replaceFragment(FragmentMisProductosA())
                 }
-                R.id.op_productos_a -> {
-                    replaceFragment(FragmentProductosA())
-                    true
-                }
-                R.id.op_usuarios_a -> {
-                    replaceFragment(FragmentUsuariosA())
-                    true
-                }
-                R.id.op_pagos_a -> {
+                R.id.op_mis_ordenes_v->{
                     replaceFragment(FragmentOrdenesA())
-                    true
                 }
-                R.id.op_cerrar_sesion_a -> {
-                    // TODO: limpiar SharedPreferences y navegar a LoginActivity
-                    Toast.makeText(requireContext(), "Saliste de la aplicación", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                else -> false
             }
+            true
         }
 
-        replaceFragment(FragmentProductosA())
-        binding.bottomNavigation.selectedItemId = R.id.op_productos_a
+
+        replaceFragment(FragmentMisProductosA())
+        binding.bottomNavigation.selectedItemId = R.id.op_mis_productos_v
 
         binding.addFab.setOnClickListener {
             val intent = Intent(mContext, AgregarProductoActivity::class.java)
             intent.putExtra("Edicion", false)
             mContext.startActivity(intent)
         }
+
+        return binding.root
+
+
     }
 
     private fun replaceFragment(fragment: Fragment) {
