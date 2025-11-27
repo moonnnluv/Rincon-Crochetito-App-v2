@@ -1,4 +1,4 @@
-```txt
+
 # Rincon Crochetito App v2 – README
 
 Aplicación Android nativa desarrollada en Kotlin con layouts XML y ViewBinding, orientada a la venta de productos de crochet para la tienda “Rincón Crochetito”. El proyecto implementa un flujo completo de e-commerce básico con roles de Cliente y Administrador, usando Firebase como backend principal y una integración opcional con un backend Node.js vía Retrofit.
@@ -574,3 +574,4 @@ Este flujo cubre los puntos principales requeridos para la demo.
 
 _Fin del README._
 ```
+
