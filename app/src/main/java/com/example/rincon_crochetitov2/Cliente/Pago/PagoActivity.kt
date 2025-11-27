@@ -4,36 +4,92 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.rincon_crochetitov2.Cliente.Carrito.CarritoManager
+import com.example.rincon_crochetitov2.Modelos.ModeloProductoCarrito
 import com.example.rincon_crochetitov2.databinding.ActivityPagoBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 class PagoActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPagoBinding
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-    // Referencia a Realtime Database (ruta "Ordenes", puedes cambiar el nombre si quieres)
+    private lateinit var usuariosRef: DatabaseReference
     private val ordenesRef: DatabaseReference by lazy {
         FirebaseDatabase.getInstance().getReference("Ordenes")
     }
+
+    private val itemsCarrito = mutableListOf<ModeloProductoCarrito>()
+    private var totalCarrito = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPagoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Mostrar total del carrito
-        val total = CarritoManager.obtenerTotal()
-        binding.tvTotalPago.text = "Total: $${"%.0f".format(total)}"
+        usuariosRef = FirebaseDatabase.getInstance().getReference("Usuarios")
 
+        // 1) Cargamos productos del carrito y calculamos total
+        cargarCarritoDesdeFirebase()
+
+        // 2) Confirmar pago → crear orden
         binding.btnConfirmarPago.setOnClickListener {
             registrarOrdenEnFirebase()
         }
     }
 
+    /** Lee "CarritoCompras" del usuario y calcula el total */
+    private fun cargarCarritoDesdeFirebase() {
+        val uid = auth.currentUser?.uid
+        if (uid == null) {
+            Toast.makeText(this, "Debes iniciar sesión", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
+        binding.progressBarPago.visibility = View.VISIBLE
+
+        usuariosRef.child(uid).child("CarritoCompras")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    binding.progressBarPago.visibility = View.GONE
+
+                    itemsCarrito.clear()
+                    totalCarrito = 0.0
+
+                    for (ds in snapshot.children) {
+                        val modelo = ds.getValue(ModeloProductoCarrito::class.java)
+                        if (modelo != null) {
+                            itemsCarrito.add(modelo)
+                            val totalItem = modelo.precioFinal.toDoubleOrNull() ?: 0.0
+                            totalCarrito += totalItem
+                        }
+                    }
+
+                    binding.tvTotalPago.text = "Total: ${totalCarrito.toInt()} CLP"
+
+                    if (itemsCarrito.isEmpty()) {
+                        Toast.makeText(
+                            this@PagoActivity,
+                            "Tu carrito está vacío",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finish()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    binding.progressBarPago.visibility = View.GONE
+                    Toast.makeText(
+                        this@PagoActivity,
+                        "Error al cargar el carrito: ${error.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
+    }
+
+    /** Crea la orden en Firebase usando los productos cargados */
     private fun registrarOrdenEnFirebase() {
         val usuario = auth.currentUser
         if (usuario == null) {
@@ -53,13 +109,12 @@ class PagoActivity : AppCompatActivity() {
             return
         }
 
-        val itemsCarrito = CarritoManager.getItems()
         if (itemsCarrito.isEmpty()) {
             Toast.makeText(this, "El carrito está vacío", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Lista de productos para guardar en la orden
+        // Estructura simple de productos para la orden
         val productos = itemsCarrito.map { item ->
             mapOf(
                 "idProducto" to item.idProducto,
@@ -70,12 +125,10 @@ class PagoActivity : AppCompatActivity() {
             )
         }
 
-        val total = CarritoManager.obtenerTotal()
-
         val orden = hashMapOf(
             "userId" to usuario.uid,
             "productos" to productos,
-            "total" to total,
+            "total" to totalCarrito,
             "direccionEnvio" to direccion,
             "comentario" to comentario,
             "estado" to "pendiente", // pago simulado
@@ -85,11 +138,12 @@ class PagoActivity : AppCompatActivity() {
         binding.progressBarPago.visibility = View.VISIBLE
         binding.btnConfirmarPago.isEnabled = false
 
-        // Guardamos la orden en Realtime Database
         ordenesRef.push()
             .setValue(orden)
             .addOnSuccessListener {
-                CarritoManager.limpiar()
+                // Limpia carrito en BD
+                limpiarCarritoEnFirebase(usuario.uid)
+
                 binding.progressBarPago.visibility = View.GONE
                 Toast.makeText(
                     this,
@@ -107,5 +161,10 @@ class PagoActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
             }
+    }
+
+    /** Borra el nodo CarritoCompras del usuario en Firebase */
+    private fun limpiarCarritoEnFirebase(uid: String) {
+        usuariosRef.child(uid).child("CarritoCompras").removeValue()
     }
 }

@@ -1,55 +1,58 @@
 package com.example.rincon_crochetitov2.Cliente.Carrito
 
-import com.example.rincon_crochetitov2.Modelos.ModeloProducto
 import com.example.rincon_crochetitov2.Modelos.ModeloProductoCarrito
 
 object CarritoManager {
 
-    private val items = mutableListOf<ModeloProductoCarrito>()
+    // Lista en memoria con el contenido del carrito
+    private val items: MutableList<ModeloProductoCarrito> = mutableListOf()
 
     fun getItems(): List<ModeloProductoCarrito> = items
 
-    fun agregarDesdeProducto(producto: ModeloProducto) {
-        // Si ya existe en el carrito, sumamos cantidad
-        val existente = items.find { it.idProducto == producto.id }
-        if (existente != null) {
-            existente.cantidad += 1
-        } else {
-            val precioBase = producto.precio.toDoubleOrNull() ?: 0.0
-            val precioDesc = producto.precioDesc.toDoubleOrNull() ?: precioBase
-
+    // 👉 Lo usamos desde el Fragment para “sincronizar” lo que viene de Firebase
+    fun setItems(lista: List<ModeloProductoCarrito>) {
+        items.clear()
+        // copiamos por si acaso para no depender de la misma referencia
+        lista.forEach { origen ->
             items.add(
                 ModeloProductoCarrito(
-                    idProducto = producto.id,
-                    nombre = producto.nombre,
-                    precio = precioBase.toString(),
-                    precioFinal = precioDesc.toString(),
-                    precioDesc = producto.precioDesc,
-                    cantidad = 1
+                    idProducto = origen.idProducto,
+                    nombre = origen.nombre,
+                    precio = origen.precio,
+                    precioFinal = origen.precioFinal,
+                    precioDesc = origen.precioDesc,
+                    cantidad = origen.cantidad
                 )
             )
         }
     }
 
-    fun agregarItem(item: ModeloProductoCarrito) {
+    fun agregarProducto(item: ModeloProductoCarrito) {
         val existente = items.find { it.idProducto == item.idProducto }
         if (existente != null) {
             existente.cantidad += item.cantidad
+            recalcularPrecioFinal(existente)
         } else {
-            items.add(item)
+            val nuevo = ModeloProductoCarrito(
+                idProducto = item.idProducto,
+                nombre = item.nombre,
+                precio = item.precio,
+                precioFinal = item.precioFinal,
+                precioDesc = item.precioDesc,
+                cantidad = if (item.cantidad <= 0) 1 else item.cantidad
+            )
+            recalcularPrecioFinal(nuevo)
+            items.add(nuevo)
         }
     }
 
     fun actualizarCantidad(idProducto: String, nuevaCantidad: Int) {
         val item = items.find { it.idProducto == idProducto } ?: return
-        if (nuevaCantidad <= 0) {
-            items.remove(item)
-        } else {
-            item.cantidad = nuevaCantidad
-        }
+        item.cantidad = nuevaCantidad
+        recalcularPrecioFinal(item)
     }
 
-    fun eliminar(idProducto: String) {
+    fun eliminarProducto(idProducto: String) {
         items.removeAll { it.idProducto == idProducto }
     }
 
@@ -59,10 +62,20 @@ object CarritoManager {
 
     fun obtenerTotal(): Double {
         return items.sumOf { item ->
-            val precioFinal = item.precioFinal.toDoubleOrNull()
-                ?: item.precio.toDoubleOrNull()
-                ?: 0.0
-            precioFinal * item.cantidad
+            val precioFinalNum = item.precioFinal.toDoubleOrNull()
+            if (precioFinalNum != null && precioFinalNum > 0.0) {
+                precioFinalNum
+            } else {
+                val unit = item.precio.toDoubleOrNull() ?: 0.0
+                val cant = if (item.cantidad > 0) item.cantidad else 1
+                unit * cant
+            }
         }
+    }
+
+    private fun recalcularPrecioFinal(item: ModeloProductoCarrito) {
+        val unit = item.precio.toDoubleOrNull() ?: 0.0
+        val cant = if (item.cantidad > 0) item.cantidad else 1
+        item.precioFinal = (unit * cant).toString()
     }
 }

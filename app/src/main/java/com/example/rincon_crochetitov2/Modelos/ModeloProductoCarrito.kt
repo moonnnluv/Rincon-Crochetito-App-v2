@@ -1,6 +1,5 @@
 package com.example.rincon_crochetitov2.Modelos
 
-
 class ModeloProductoCarrito {
 
     var idProducto : String = ""
@@ -11,6 +10,7 @@ class ModeloProductoCarrito {
     var cantidad : Int = 0
 
     constructor()
+
     constructor(
         idProducto: String,
         nombre: String,
@@ -26,6 +26,4 @@ class ModeloProductoCarrito {
         this.precioDesc = precioDesc
         this.cantidad = cantidad
     }
-
-
 }

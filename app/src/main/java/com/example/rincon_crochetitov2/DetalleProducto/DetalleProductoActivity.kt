@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rincon_crochetitov2.Adaptadores.AdaptadorImgSlider
 import com.example.rincon_crochetitov2.Calificacion.CalificarProductoActivity
@@ -12,18 +13,18 @@ import com.example.rincon_crochetitov2.Modelos.ModeloImgSlider
 import com.example.rincon_crochetitov2.Modelos.ModeloProducto
 import com.example.rincon_crochetitov2.databinding.ActivityDetalleProductoBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
 class DetalleProductoActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityDetalleProductoBinding
+    private lateinit var binding: ActivityDetalleProductoBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private var idProducto = ""
 
-    private lateinit var imagenSlider : ArrayList<ModeloImgSlider>
+    private lateinit var imagenSlider: ArrayList<ModeloImgSlider>
+
+    // 👇 Producto cargado desde Firebase, para usarlo al agregar al carrito
+    private var productoActual: ModeloProducto? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,7 @@ class DetalleProductoActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        //Obtenemos el id del producto enviado desde el adaptador
+        // Obtenemos el id del producto enviado desde el adaptador
         idProducto = intent.getStringExtra("idProducto").toString()
 
         cargarImagenesProd()
@@ -43,41 +44,54 @@ class DetalleProductoActivity : AppCompatActivity() {
         }
 
         binding.tvDejarCalificacion.setOnClickListener {
-            val intent = Intent(this , CalificarProductoActivity::class.java)
+            val intent = Intent(this, CalificarProductoActivity::class.java)
             intent.putExtra("idProducto", idProducto)
             startActivity(intent)
         }
 
         binding.tvPromCal.setOnClickListener {
-            val intent = Intent(this , MostrarCalificacionesActivity::class.java)
+            val intent = Intent(this, MostrarCalificacionesActivity::class.java)
             intent.putExtra("idProducto", idProducto)
             startActivity(intent)
         }
 
-        calcularPromedioCal(idProducto)
+        // 👉 BOTÓN AGREGAR AL CARRITO
+        binding.btnAgregarCarrito.setOnClickListener {
+            val producto = productoActual
+            if (producto == null) {
+                Toast.makeText(
+                    this,
+                    "Cargando datos del producto, intenta de nuevo",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+            agregarProductoAlCarritoFirebase(producto)
+        }
 
+        calcularPromedioCal(idProducto)
     }
 
     private fun calcularPromedioCal(idProducto: String) {
-        val ref = FirebaseDatabase.getInstance().getReference("Productos/$idProducto/Calificaciones")
-        ref.addValueEventListener(object : ValueEventListener{
+        val ref =
+            FirebaseDatabase.getInstance().getReference("Productos/$idProducto/Calificaciones")
+        ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var sumaCalificaciones = 0
                 var totalCalificaciones = 0
 
-                for (calificacionSn in snapshot.children){
+                for (calificacionSn in snapshot.children) {
+                    val calificacion =
+                        calificacionSn.child("calificacion").getValue(Int::class.java)
 
-                    val calificacion = calificacionSn.child("calificacion").getValue(Int::class.java)
-
-                    if (calificacion != null){
+                    if (calificacion != null) {
                         sumaCalificaciones += calificacion
                         totalCalificaciones++
                     }
-
                 }
 
-                if (totalCalificaciones > 0){
-                    val promedio = sumaCalificaciones.toDouble() / totalCalificaciones //10 / 2 = 5
+                if (totalCalificaciones > 0) {
+                    val promedio = sumaCalificaciones.toDouble() / totalCalificaciones
 
                     binding.tvPromCal.text = promedio.toString().plus("/5")
                     binding.tvTotalCal.text = ("(${totalCalificaciones})")
@@ -86,47 +100,47 @@ class DetalleProductoActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                // Evitamos el TODO que crashea
             }
         })
-
-
-
-
-
     }
 
     private fun cargarInfoProducto() {
         val ref = FirebaseDatabase.getInstance().getReference("Productos")
         ref.child(idProducto)
-            .addValueEventListener(object : ValueEventListener{
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val modeloProducto = snapshot.getValue(ModeloProducto::class.java)
+                    val modeloProducto = snapshot.getValue(ModeloProducto::class.java) ?: return
 
-                    val nombre = modeloProducto?.nombre
-                    val descripcion = modeloProducto?.descripcion
-                    val precio = modeloProducto?.precio
-                    val precioDesc = modeloProducto?.precioDesc
-                    val notaDesc = modeloProducto?.notaDesc
+                    // Guardamos el id en el modelo y lo dejamos en productoActual
+                    modeloProducto.id = snapshot.key ?: idProducto
+                    productoActual = modeloProducto
+
+                    val nombre = modeloProducto.nombre
+                    val descripcion = modeloProducto.descripcion
+                    val precio = modeloProducto.precio
+                    val precioDesc = modeloProducto.precioDesc
+                    val notaDesc = modeloProducto.notaDesc
 
                     binding.nombrePD.text = nombre
                     binding.descripcionPD.text = descripcion
                     binding.precioPD.text = precio.plus(" CLP")
 
-                    if (!precioDesc.equals("") && !notaDesc.equals("")){
-                        /*Producto con descuento*/
+                    if (!precioDesc.equals("") && !notaDesc.equals("")) {
+                        // Producto con descuento
                         binding.precioDescPD.text = precioDesc.plus(" CLP")
                         binding.notaDescPD.text = notaDesc
 
-                        binding.precioPD.paintFlags = binding.precioPD.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                    }else{
+                        binding.precioPD.paintFlags =
+                            binding.precioPD.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    } else {
                         binding.precioDescPD.visibility = View.GONE
                         binding.notaDescPD.visibility = View.GONE
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+                    // Evitamos el TODO que crashea
                 }
             })
     }
@@ -135,23 +149,88 @@ class DetalleProductoActivity : AppCompatActivity() {
         imagenSlider = ArrayList()
         val ref = FirebaseDatabase.getInstance().getReference("Productos")
         ref.child(idProducto).child("Imagenes")
-            .addValueEventListener(object : ValueEventListener{
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     imagenSlider.clear()
-                    for (ds in snapshot.children){
+                    for (ds in snapshot.children) {
                         try {
                             val modeloImgSlider = ds.getValue(ModeloImgSlider::class.java)
-                            imagenSlider.add(modeloImgSlider!!)
-                        }catch (e:Exception){
-
+                            if (modeloImgSlider != null) {
+                                imagenSlider.add(modeloImgSlider)
+                            }
+                        } catch (e: Exception) {
                         }
                     }
-                    val adaptadorImgSlider = AdaptadorImgSlider(this@DetalleProductoActivity, imagenSlider)
+                    val adaptadorImgSlider =
+                        AdaptadorImgSlider(this@DetalleProductoActivity, imagenSlider)
                     binding.imagenVP.adapter = adaptadorImgSlider
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+                    // Evitamos el TODO que crashea
+                }
+            })
+    }
+
+    // 🔹 Guarda/actualiza el producto en Usuarios/{uid}/CarritoCompras/{idProducto}
+    private fun agregarProductoAlCarritoFirebase(producto: ModeloProducto) {
+        val uid = firebaseAuth.uid
+        if (uid == null) {
+            Toast.makeText(this, "Debes iniciar sesión para usar el carrito", Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
+
+        val refCarrito = FirebaseDatabase.getInstance()
+            .getReference("Usuarios")
+            .child(uid)
+            .child("CarritoCompras")
+
+        val idProd = producto.id
+        val precioUnitStr =
+            if (producto.precioDesc.isNotEmpty()) producto.precioDesc else producto.precio
+        val precioUnit = precioUnitStr.toDoubleOrNull() ?: 0.0
+
+        // Si ya existe, incrementamos cantidad; si no, lo creamos
+        refCarrito.child(idProd)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val cantidadActual = snapshot.child("cantidad").getValue(Int::class.java) ?: 0
+                    val nuevaCantidad = cantidadActual + 1
+                    val totalItem = precioUnit * nuevaCantidad
+
+                    val datos = hashMapOf<String, Any>(
+                        "idProducto" to idProd,
+                        "nombre" to producto.nombre,
+                        "precio" to producto.precio,
+                        "precioFinal" to totalItem.toInt().toString(),
+                        "precioDesc" to producto.precioDesc,
+                        "cantidad" to nuevaCantidad
+                    )
+
+                    refCarrito.child(idProd).setValue(datos)
+                        .addOnSuccessListener {
+                            Toast.makeText(
+                                this@DetalleProductoActivity,
+                                "Producto agregado al carrito",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(
+                                this@DetalleProductoActivity,
+                                "Error al agregar al carrito: ${e.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(
+                        this@DetalleProductoActivity,
+                        "Error al agregar al carrito: ${error.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             })
     }
