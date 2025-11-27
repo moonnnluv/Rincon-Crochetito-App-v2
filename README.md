@@ -14,7 +14,6 @@ Aplicación Android nativa desarrollada en Kotlin con layouts XML y ViewBinding,
 
 La app usa **Firebase** como backend principal (**Auth**, **Realtime Database** y **Storage**) y tiene además una integración opcional con un backend **Node.js** expuesto vía **Retrofit** (para un endpoint de creación de preferencia de pago).
 
-Proyecto final de la asignatura: _[reemplazar por nombre real y semestre]_.
 
 ---
 
@@ -574,4 +573,5 @@ Este flujo cubre los puntos principales requeridos para la demo.
 
 _Fin del README._
 ```
+
 
